@@ -1,0 +1,207 @@
+openapi: 3.0.1
+info:
+  title: Implementing Server Side Kotlin
+  description: Sample API of Hands On Server Side Kotlin
+  version: "0.0"
+servers:
+  - url: http://localhost:8080
+    description: Local Server
+paths:
+  /api/staffs/{id}/:
+    get:
+      tags:
+        - staff-controller
+      operationId: show
+      parameters:
+        - name: id
+          in: path
+          description: StaffのId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BigInteger"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Staff"
+    put:
+      tags:
+        - staff-controller
+      operationId: update
+      parameters:
+        - name: id
+          in: path
+          description: 更新するスタッフ
+          required: true
+          schema:
+            $ref: "#/components/schemas/UpdateStaffRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Staff"
+    delete:
+      tags:
+        - staff-controller
+      operationId: delete
+      parameters:
+        - name: id
+          in: path
+          description: StaffのId
+          required: true
+          schema:
+            $ref: "#/components/schemas/BigInteger"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unit"
+  /api/staffs/:
+    get:
+      tags:
+        - staff-controller
+      operationId: index
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Staff"
+    post:
+      tags:
+        - staff-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewStaffRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Staff"
+components:
+  schemas:
+    UpdateStaff:
+      required:
+        - birthDate
+        - firstName
+        - id
+        - lastName
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID
+          format: int64
+        firstName:
+          type: string
+          description: 名
+          example: update-staff-first-name
+        lastName:
+          type: string
+          description: 性
+          example: update-staff-last-name
+        birthDate:
+          type: string
+          description: 生年月日
+          format: date-time
+      example: null
+    UpdateStaffRequest:
+      required:
+        - staff
+      type: object
+      properties:
+        staff:
+          $ref: "#/components/schemas/UpdateStaff"
+    Staff:
+      required:
+        - birthDate
+        - firstName
+        - id
+        - lastName
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        birthDate:
+          type: string
+          format: date-time
+    NewStaff:
+      required:
+        - birthDate
+        - firstName
+        - lastName
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: 名
+          example: new-staff-first-name
+        lastName:
+          type: string
+          description: 性
+          example: new-staff-last-name
+        birthDate:
+          type: string
+          description: 生年月日
+          format: date-time
+    NewStaffRequest:
+      required:
+        - staff
+      type: object
+      properties:
+        staff:
+          $ref: "#/components/schemas/NewStaff"
+      description: 新規作成するスタッフ
+    BigInteger:
+      required:
+        - absoluteValue
+        - bitCount
+        - bitLength
+        - get_mag$kt_math
+        - get_signum$kt_math
+        - signum
+      type: object
+      properties:
+        bit:
+          $ref: "#/components/schemas/BigInteger"
+        get_signum$kt_math:
+          type: integer
+          format: int32
+        get_mag$kt_math:
+          type: array
+          items:
+            type: integer
+            format: int32
+        absoluteValue:
+          $ref: "#/components/schemas/BigInteger"
+        bitLength:
+          type: integer
+          format: int32
+        signum:
+          type: integer
+          format: int32
+        bitCount:
+          type: integer
+          format: int32
+    Unit:
+      type: object

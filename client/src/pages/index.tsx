@@ -120,6 +120,16 @@ export default function Home({
             >
               ログイン
             </Button>
+            <Button
+              sx={(theme) => ({
+                '& .MuiButton-root': {
+                  color: theme.palette.primary.contrastText,
+                },
+              })}
+              onClick={() => router.push(pagesPath.staff.$url())}
+            >
+              スタッフページ
+            </Button>
           </div>
           <Box sx={(theme) => ({
             position: "absolute",

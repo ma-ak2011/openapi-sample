@@ -5,24 +5,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48e04461-93f7-4d2e-91cb-f57e09397170" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/leassell.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Link.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/LinkButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/api/users.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/login.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/my_page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/staff/[sid].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/staff/create.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/staff/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/state/userState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/types/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/emailValidater.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/passwordValidater.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/Staff.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/entity/Staff.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/repository/StaffRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/service/StaffService.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/aspida.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/LoadingOverlay.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/dialog/ConfirmDialog.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/openapi/openapi.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/staff/[sid]/edit.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/staff/[sid]/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/fetcher.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/StaffController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/StaffController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/model/Staff.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/staff/[sid].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/Readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/staff/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/staff/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/$path.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/$path.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +42,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -40,26 +52,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapisample/client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "Errors",
-    "ts.external.directory.path": "/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/setup-project&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapi-sample/client/src/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapi-sample/client/node_modules/typescript/lib&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/features/staff" />
       <recent name="$PROJECT_DIR$/src/utils" />
       <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/staff/[sid]" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
@@ -82,6 +97,11 @@
       <workItem from="1721796019670" duration="25778000" />
       <workItem from="1721977451669" duration="8000" />
       <workItem from="1721977617743" duration="147000" />
+      <workItem from="1721980944361" duration="55000" />
+      <workItem from="1721981003830" duration="12500000" />
+      <workItem from="1722008267046" duration="16217000" />
+      <workItem from="1722063745738" duration="5527000" />
+      <workItem from="1722156636161" duration="20255000" />
     </task>
     <servers />
   </component>

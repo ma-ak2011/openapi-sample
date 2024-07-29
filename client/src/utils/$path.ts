@@ -7,6 +7,9 @@ export const pagesPath = {
   },
   "staff": {
     _sid: (sid: string | number) => ({
+      "edit": {
+        $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/staff/[sid]/edit' as const, query: { sid }, hash: url?.hash })
+      },
       $url: (url?: { hash?: string | undefined } | undefined) => ({ pathname: '/staff/[sid]' as const, query: { sid }, hash: url?.hash })
     }),
     "create": {

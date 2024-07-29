@@ -1,4 +1,4 @@
-import type {InferGetServerSidePropsType} from "next";
+import type {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import useSWRMutation from "swr/mutation";
@@ -11,29 +11,43 @@ import {
 import LoadingOverlay from "@/components/LoadingOverlay";
 import {pagesPath} from "@/utils/$path";
 import {Add, Save,} from "@mui/icons-material";
-import {getServerSideProps} from "@/pages/staff/index";
 import {DatePicker} from "@mui/x-date-pickers";
 import {NewStaff, Staff} from "@/openapi/openapi-generated";
 
 const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
   await fetch(url, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ staff: arg }),
   });
 
-export default function Create() {
-  const [staff, setStaff] = useState<Staff>({
-    id: 0,
-    lastName: "",
-    firstName: "",
-    birthDate: new Date(),
+export const getServerSideProps = (async (context) => {
+  const { sid } = context.query;
+  const res = await fetch(`http://localhost:8080/api/staffs/${sid}/`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  const staff = await res.json();
+
+  return { props: { staff } }
+}) satisfies GetServerSideProps<{ staff: Staff }>
+
+export default function Edit({
+                               staff,
+                             }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const [staffUnderEdit, setStaffUnderEdit] = useState<Staff>({
+    id: staff.id,
+    lastName: staff.lastName,
+    firstName: staff.firstName,
+    birthDate: new Date(staff.birthDate),
   });
 
   const router = useRouter();
-  const { trigger, isMutating } = useSWRMutation("http://localhost:8080/api/staffs/", fetcher);
+  const { trigger, isMutating } = useSWRMutation(`http://localhost:8080/api/staffs/${staff.id}/`, fetcher);
 
   return (
     <>
@@ -65,9 +79,9 @@ export default function Create() {
                   fullWidth
                   required
                   label="姓"
-                  value={staff.lastName}
+                  value={staffUnderEdit.lastName}
                   onChange={(e) =>
-                    setStaff({ ...staff, lastName: e.target.value })
+                    setStaffUnderEdit({ ...staffUnderEdit, lastName: e.target.value })
                   }
                 />
               </Grid>
@@ -77,9 +91,9 @@ export default function Create() {
                   fullWidth
                   required
                   label="名"
-                  value={staff.firstName}
+                  value={staffUnderEdit.firstName}
                   onChange={(e) =>
-                    setStaff({ ...staff, firstName: e.target.value })
+                    setStaffUnderEdit({ ...staffUnderEdit, firstName: e.target.value })
                   }
                 />
               </Grid>
@@ -88,12 +102,12 @@ export default function Create() {
                 <DatePicker
                   label="生年月日"
                   format="YYYY/MM/DD"
-                  value={staff.birthDate}
+                  value={staffUnderEdit.birthDate}
                   onChange={(date) => {
                     if (date === null) return;
 
-                    setStaff({
-                      ...staff,
+                    setStaffUnderEdit({
+                      ...staffUnderEdit,
                       birthDate: date,
                     });
                   }}
@@ -107,7 +121,7 @@ export default function Create() {
               style={{ left: "50%", bottom: "2%", position: "fixed" }}
               disabled={isMutating}
               onClick={async () => {
-                await trigger(staff);
+                await trigger(staffUnderEdit);
                 await router.push(pagesPath.staff.$url());
               }}
             >
