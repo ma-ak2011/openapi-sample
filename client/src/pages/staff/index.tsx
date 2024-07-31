@@ -242,8 +242,13 @@ export default function Staffs({
                       {sortedStaffs.map((s) => {
                         return (
                           <TableRow
+                            onClick={async () =>
+                              await router.push(
+                                pagesPath.staff._sid(s.id).$url(),
+                              )
+                            }
                             hover
-                            style={{ opacity: 1, margin: 4 }}
+                            sx={{ opacity: 1, margin: 4, cursor: 'pointer' }}
                             key={s.id}
                           >
                             <TableCell align="left">{s.lastName}</TableCell>

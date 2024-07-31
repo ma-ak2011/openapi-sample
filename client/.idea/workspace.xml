@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48e04461-93f7-4d2e-91cb-f57e09397170" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/Staff.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/Staff.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/StaffController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/controller/StaffController.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/entity/Staff.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/kotlin/com/example/backend/entity/Staff.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/aspida/@types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/aspida/@types/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/openapi-generated/.openapi-generator/FILES" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/openapi-generated/.openapi-generator/FILES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/openapi-generated/models/BigInteger.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/openapi-generated/models/BigInteger.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/openapi-generated/models/NewStaff.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/openapi-generated/models/NewStaff.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/openapi-generated/models/Staff.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/openapi-generated/models/Staff.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/openapi/openapi-generated/models/UpdateStaff.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/openapi/openapi-generated/models/UpdateStaff.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/staff/[sid]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/[sid]/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/staff/[sid]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/[sid]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/staff/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/staff/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/staff/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../openapi/openapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../openapi/openapi.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +79,7 @@
       <workItem from="1722156636161" duration="20255000" />
       <workItem from="1722420166741" duration="6615000" />
       <workItem from="1722427369805" duration="4644000" />
-      <workItem from="1722432034374" duration="1644000" />
+      <workItem from="1722432034374" duration="2693000" />
     </task>
     <servers />
   </component>
