@@ -30,24 +30,6 @@ export interface BigInteger {
      * @type {number}
      * @memberof BigInteger
      */
-    bitLength: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BigInteger
-     */
-    signum: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BigInteger
-     */
-    bitCount: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof BigInteger
-     */
     getSignum$ktMath: number;
     /**
      * 
@@ -61,18 +43,36 @@ export interface BigInteger {
      * @memberof BigInteger
      */
     absoluteValue: BigInteger;
+    /**
+     * 
+     * @type {number}
+     * @memberof BigInteger
+     */
+    bitLength: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BigInteger
+     */
+    signum: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof BigInteger
+     */
+    bitCount: number;
 }
 
 /**
  * Check if a given object implements the BigInteger interface.
  */
 export function instanceOfBigInteger(value: object): value is BigInteger {
-    if (!('bitLength' in value) || value['bitLength'] === undefined) return false;
-    if (!('signum' in value) || value['signum'] === undefined) return false;
-    if (!('bitCount' in value) || value['bitCount'] === undefined) return false;
     if (!('getSignum$ktMath' in value) || value['getSignum$ktMath'] === undefined) return false;
     if (!('getMag$ktMath' in value) || value['getMag$ktMath'] === undefined) return false;
     if (!('absoluteValue' in value) || value['absoluteValue'] === undefined) return false;
+    if (!('bitLength' in value) || value['bitLength'] === undefined) return false;
+    if (!('signum' in value) || value['signum'] === undefined) return false;
+    if (!('bitCount' in value) || value['bitCount'] === undefined) return false;
     return true;
 }
 
@@ -87,12 +87,12 @@ export function BigIntegerFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     return {
         
         'bit': json['bit'] == null ? undefined : BigIntegerFromJSON(json['bit']),
-        'bitLength': json['bitLength'],
-        'signum': json['signum'],
-        'bitCount': json['bitCount'],
         'getSignum$ktMath': json['get_signum$kt_math'],
         'getMag$ktMath': json['get_mag$kt_math'],
         'absoluteValue': BigIntegerFromJSON(json['absoluteValue']),
+        'bitLength': json['bitLength'],
+        'signum': json['signum'],
+        'bitCount': json['bitCount'],
     };
 }
 
@@ -103,12 +103,12 @@ export function BigIntegerToJSON(value?: BigInteger | null): any {
     return {
         
         'bit': BigIntegerToJSON(value['bit']),
-        'bitLength': value['bitLength'],
-        'signum': value['signum'],
-        'bitCount': value['bitCount'],
         'get_signum$kt_math': value['getSignum$ktMath'],
         'get_mag$kt_math': value['getMag$ktMath'],
         'absoluteValue': BigIntegerToJSON(value['absoluteValue']),
+        'bitLength': value['bitLength'],
+        'signum': value['signum'],
+        'bitCount': value['bitCount'],
     };
 }
 

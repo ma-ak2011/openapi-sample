@@ -29,6 +29,13 @@ data class NewStaff(
     @field:NotNull
     @field:JsonProperty("birthDate", required = true)
     private val birthDate: OffsetDateTime? = null,
+
+    @Schema(example = "new-staff-email", required = true, description = "メールアドレス")
+    @field:Valid
+    @field:NotBlank
+    @field:Length(min = 0, max = 200)
+    @field:JsonProperty("email", required = true)
+    private val email: String? = null,
 ) {
     @get:Schema(hidden = true)
     val validatedFirstName: String
@@ -41,6 +48,10 @@ data class NewStaff(
     @get:Schema(hidden = true)
     val validatedBirthDate: OffsetDateTime
         get() = birthDate!!
+
+    @get:Schema(hidden = true)
+    val validatedEmail: String
+        get() = email!!
 }
 
 data class NewStaffRequest(
@@ -81,6 +92,13 @@ data class UpdateStaff(
     @field:NotNull
     @field:JsonProperty("birthDate", required = true)
     private val birthDate: OffsetDateTime? = null,
+
+    @Schema(example = "update-staff-email", required = true, description = "メールアドレス")
+    @field:Valid
+    @field:NotBlank
+    @field:Length(min = 0, max = 200)
+    @field:JsonProperty("email", required = true)
+    private val email: String? = null,
 ) {
     @get:Schema(hidden = true)
     val validatedId: Long
@@ -97,6 +115,10 @@ data class UpdateStaff(
     @get:Schema(hidden = true)
     val validatedBirthDate: OffsetDateTime
         get() = birthDate!!
+
+    @get:Schema(hidden = true)
+    val validatedEmail: String
+        get() = email!!
 }
 
 data class UpdateStaffRequest(

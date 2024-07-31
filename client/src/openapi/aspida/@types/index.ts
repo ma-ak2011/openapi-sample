@@ -8,6 +8,8 @@ export type UpdateStaff = {
   lastName: string
   /** 生年月日 */
   birthDate: string
+  /** メールアドレス */
+  email: string
 }
 
 export type UpdateStaffRequest = {
@@ -19,6 +21,7 @@ export type Staff = {
   firstName: string
   lastName: string
   birthDate: string
+  email: string
 }
 
 export type NewStaff = {
@@ -28,6 +31,8 @@ export type NewStaff = {
   lastName: string
   /** 生年月日 */
   birthDate: string
+  /** メールアドレス */
+  email: string
 }
 
 /** 新規作成するスタッフ */
@@ -37,10 +42,10 @@ export type NewStaffRequest = {
 
 export type BigInteger = {
   bit?: BigInteger | undefined
-  bitLength: number
-  signum: number
-  bitCount: number
   get_signum$kt_math: number
   get_mag$kt_math: number[]
   absoluteValue: BigInteger
+  bitLength: number
+  signum: number
+  bitCount: number
 }

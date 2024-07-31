@@ -52,7 +52,8 @@ class StaffController(
             0,
             newStaffRequest.validatedStaff.validatedFirstName,
             newStaffRequest.validatedStaff.validatedLastName,
-            newStaffRequest.validatedStaff.validatedBirthDate
+            newStaffRequest.validatedStaff.validatedBirthDate,
+            newStaffRequest.validatedStaff.validatedEmail
         )
         staffService.save(newStaff)
         return ResponseEntity(
@@ -72,7 +73,8 @@ class StaffController(
             updateStaffRequest.validatedStaff.validatedId,
             updateStaffRequest.validatedStaff.validatedFirstName,
             updateStaffRequest.validatedStaff.validatedLastName,
-            updateStaffRequest.validatedStaff.validatedBirthDate
+            updateStaffRequest.validatedStaff.validatedBirthDate,
+            updateStaffRequest.validatedStaff.validatedEmail
         )
         staffService.save(updatedStaff)
         return ResponseEntity(

@@ -43,6 +43,12 @@ export interface UpdateStaff {
      * @memberof UpdateStaff
      */
     birthDate: Date;
+    /**
+     * メールアドレス
+     * @type {string}
+     * @memberof UpdateStaff
+     */
+    email: string;
 }
 
 /**
@@ -53,6 +59,7 @@ export function instanceOfUpdateStaff(value: object): value is UpdateStaff {
     if (!('firstName' in value) || value['firstName'] === undefined) return false;
     if (!('lastName' in value) || value['lastName'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
     return true;
 }
 
@@ -70,6 +77,7 @@ export function UpdateStaffFromJSONTyped(json: any, ignoreDiscriminator: boolean
         'firstName': json['firstName'],
         'lastName': json['lastName'],
         'birthDate': (new Date(json['birthDate'])),
+        'email': json['email'],
     };
 }
 
@@ -83,6 +91,7 @@ export function UpdateStaffToJSON(value?: UpdateStaff | null): any {
         'firstName': value['firstName'],
         'lastName': value['lastName'],
         'birthDate': ((value['birthDate']).toISOString()),
+        'email': value['email'],
     };
 }
 

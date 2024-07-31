@@ -98,6 +98,7 @@ components:
     UpdateStaff:
       required:
       - birthDate
+      - email
       - firstName
       - id
       - lastName
@@ -119,6 +120,10 @@ components:
           type: string
           description: 生年月日
           format: date-time
+        email:
+          type: string
+          description: メールアドレス
+          example: update-staff-email
       example: null
     UpdateStaffRequest:
       required:
@@ -130,6 +135,7 @@ components:
     Staff:
       required:
       - birthDate
+      - email
       - firstName
       - id
       - lastName
@@ -145,9 +151,12 @@ components:
         birthDate:
           type: string
           format: date-time
+        email:
+          type: string
     NewStaff:
       required:
       - birthDate
+      - email
       - firstName
       - lastName
       type: object
@@ -164,6 +173,10 @@ components:
           type: string
           description: 生年月日
           format: date-time
+        email:
+          type: string
+          description: メールアドレス
+          example: new-staff-email
     NewStaffRequest:
       required:
       - staff
@@ -184,15 +197,6 @@ components:
       properties:
         bit:
           $ref: "#/components/schemas/BigInteger"
-        bitLength:
-          type: integer
-          format: int32
-        signum:
-          type: integer
-          format: int32
-        bitCount:
-          type: integer
-          format: int32
         get_signum$kt_math:
           type: integer
           format: int32
@@ -203,5 +207,14 @@ components:
             format: int32
         absoluteValue:
           $ref: "#/components/schemas/BigInteger"
+        bitLength:
+          type: integer
+          format: int32
+        signum:
+          type: integer
+          format: int32
+        bitCount:
+          type: integer
+          format: int32
     Unit:
       type: object

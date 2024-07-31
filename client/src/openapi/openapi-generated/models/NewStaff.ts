@@ -37,6 +37,12 @@ export interface NewStaff {
      * @memberof NewStaff
      */
     birthDate: Date;
+    /**
+     * メールアドレス
+     * @type {string}
+     * @memberof NewStaff
+     */
+    email: string;
 }
 
 /**
@@ -46,6 +52,7 @@ export function instanceOfNewStaff(value: object): value is NewStaff {
     if (!('firstName' in value) || value['firstName'] === undefined) return false;
     if (!('lastName' in value) || value['lastName'] === undefined) return false;
     if (!('birthDate' in value) || value['birthDate'] === undefined) return false;
+    if (!('email' in value) || value['email'] === undefined) return false;
     return true;
 }
 
@@ -62,6 +69,7 @@ export function NewStaffFromJSONTyped(json: any, ignoreDiscriminator: boolean): 
         'firstName': json['firstName'],
         'lastName': json['lastName'],
         'birthDate': (new Date(json['birthDate'])),
+        'email': json['email'],
     };
 }
 
@@ -74,6 +82,7 @@ export function NewStaffToJSON(value?: NewStaff | null): any {
         'firstName': value['firstName'],
         'lastName': value['lastName'],
         'birthDate': ((value['birthDate']).toISOString()),
+        'email': value['email'],
     };
 }
 
