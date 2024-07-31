@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "gen:path": "pathpida --ignorepath .gitignore -w -s --output ./src/utils",
-    "gen:open": "npx @openapitools/openapi-generator-cli generate -i ./src/openapi/openapi.yml -g typescript-fetch -o ./src/openapi/openapi-generated",
-    "gen:aspida": "openapi2aspida -o src/openapi/aspida"
+    "gen:open": "npx @openapitools/openapi-generator-cli generate -i ../openapi/openapi.yaml -g typescript-fetch -o ./src/openapi/openapi-generated",
+    "gen:aspida": "rm -rf src/openapi/aspida && openapi2aspida -o src/openapi/aspida"
   },
   "dependencies": {
     "@aspida/fetch": "^1.14.0",

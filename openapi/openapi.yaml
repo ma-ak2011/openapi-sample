@@ -4,21 +4,21 @@ info:
   description: Sample API of Hands On Server Side Kotlin
   version: "0.0"
 servers:
-  - url: http://localhost:8080
-    description: Local Server
+- url: http://localhost:8080
+  description: Local Server
 paths:
   /api/staffs/{id}/:
     get:
       tags:
-        - staff-controller
+      - staff-controller
       operationId: show
       parameters:
-        - name: id
-          in: path
-          description: StaffのId
-          required: true
-          schema:
-            $ref: "#/components/schemas/BigInteger"
+      - name: id
+        in: path
+        description: StaffのId
+        required: true
+        schema:
+          $ref: "#/components/schemas/BigInteger"
       responses:
         "200":
           description: OK
@@ -28,15 +28,15 @@ paths:
                 $ref: "#/components/schemas/Staff"
     put:
       tags:
-        - staff-controller
+      - staff-controller
       operationId: update
       parameters:
-        - name: id
-          in: path
-          description: 更新するスタッフ
-          required: true
-          schema:
-            $ref: "#/components/schemas/UpdateStaffRequest"
+      - name: id
+        in: path
+        description: 更新するスタッフ
+        required: true
+        schema:
+          $ref: "#/components/schemas/UpdateStaffRequest"
       responses:
         "200":
           description: OK
@@ -46,15 +46,15 @@ paths:
                 $ref: "#/components/schemas/Staff"
     delete:
       tags:
-        - staff-controller
+      - staff-controller
       operationId: delete
       parameters:
-        - name: id
-          in: path
-          description: StaffのId
-          required: true
-          schema:
-            $ref: "#/components/schemas/BigInteger"
+      - name: id
+        in: path
+        description: StaffのId
+        required: true
+        schema:
+          $ref: "#/components/schemas/BigInteger"
       responses:
         "200":
           description: OK
@@ -65,7 +65,7 @@ paths:
   /api/staffs/:
     get:
       tags:
-        - staff-controller
+      - staff-controller
       operationId: index
       responses:
         "200":
@@ -78,7 +78,7 @@ paths:
                   $ref: "#/components/schemas/Staff"
     post:
       tags:
-        - staff-controller
+      - staff-controller
       operationId: create
       requestBody:
         content:
@@ -97,10 +97,10 @@ components:
   schemas:
     UpdateStaff:
       required:
-        - birthDate
-        - firstName
-        - id
-        - lastName
+      - birthDate
+      - firstName
+      - id
+      - lastName
       type: object
       properties:
         id:
@@ -122,17 +122,17 @@ components:
       example: null
     UpdateStaffRequest:
       required:
-        - staff
+      - staff
       type: object
       properties:
         staff:
           $ref: "#/components/schemas/UpdateStaff"
     Staff:
       required:
-        - birthDate
-        - firstName
-        - id
-        - lastName
+      - birthDate
+      - firstName
+      - id
+      - lastName
       type: object
       properties:
         id:
@@ -147,9 +147,9 @@ components:
           format: date-time
     NewStaff:
       required:
-        - birthDate
-        - firstName
-        - lastName
+      - birthDate
+      - firstName
+      - lastName
       type: object
       properties:
         firstName:
@@ -166,7 +166,7 @@ components:
           format: date-time
     NewStaffRequest:
       required:
-        - staff
+      - staff
       type: object
       properties:
         staff:
@@ -174,25 +174,15 @@ components:
       description: 新規作成するスタッフ
     BigInteger:
       required:
-        - absoluteValue
-        - bitCount
-        - bitLength
-        - get_mag$kt_math
-        - get_signum$kt_math
-        - signum
+      - absoluteValue
+      - bitCount
+      - bitLength
+      - get_mag$kt_math
+      - get_signum$kt_math
+      - signum
       type: object
       properties:
         bit:
-          $ref: "#/components/schemas/BigInteger"
-        get_signum$kt_math:
-          type: integer
-          format: int32
-        get_mag$kt_math:
-          type: array
-          items:
-            type: integer
-            format: int32
-        absoluteValue:
           $ref: "#/components/schemas/BigInteger"
         bitLength:
           type: integer
@@ -203,5 +193,15 @@ components:
         bitCount:
           type: integer
           format: int32
+        get_signum$kt_math:
+          type: integer
+          format: int32
+        get_mag$kt_math:
+          type: array
+          items:
+            type: integer
+            format: int32
+        absoluteValue:
+          $ref: "#/components/schemas/BigInteger"
     Unit:
       type: object

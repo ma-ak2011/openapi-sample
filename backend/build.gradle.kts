@@ -65,7 +65,7 @@ tasks.withType<Test> {
 
 openApi {
     apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")
-    outputDir.set(project.layout.buildDirectory.dir("springdoc"))
+    outputDir.set(project.rootDir.parentFile.resolve("openapi"))
     outputFileName.set("openapi.yaml")
 }
 
