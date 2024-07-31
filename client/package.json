@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write .",
     "gen:path": "pathpida --ignorepath .gitignore -w -s --output ./src/utils",
     "gen:open": "npx @openapitools/openapi-generator-cli generate -i ../openapi/openapi.yaml -g typescript-fetch -o ./src/openapi/openapi-generated",
     "gen:aspida": "rm -rf src/openapi/aspida && openapi2aspida -o src/openapi/aspida"
@@ -32,10 +33,15 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8",
     "eslint-config-next": "13.5.6",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
     "openapi2aspida": "^0.23.2",
     "pathpida": "^0.22.0",
+    "prettier": "^3.3.3",
     "typescript": "^5"
   }
 }

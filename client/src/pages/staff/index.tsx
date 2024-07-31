@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
 import {
-  Box, Button, Fab, Grid, IconButton, Paper, Table,
+  Box, Button, Container, Fab, Grid, IconButton, Paper, Table,
   TableBody,
   TableCell, TableContainer, TableHead, TableRow, TableSortLabel, TextField, Toolbar, Tooltip, Typography
 } from "@mui/material";
@@ -111,7 +111,11 @@ export default function Staffs({
       </Head>
       <div>
         <main>
-          <Box>
+          <Container>
+          <Box  sx={(_theme) => ({
+            maxWidth: "105ch",
+            width: "100%",
+          })}>
             {isMutating && <LoadingOverlay />}
             <Paper>
               <Toolbar>
@@ -224,6 +228,7 @@ export default function Staffs({
               新規作成
             </Fab>
           </Box>
+          </Container>
         </main>
       </div>
     </>

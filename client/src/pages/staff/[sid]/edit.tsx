@@ -4,14 +4,13 @@ import {useRouter} from "next/router";
 import useSWRMutation from "swr/mutation";
 import Head from "next/head";
 import {
-  Box, Fab,
+  Box, Container, Fab,
   Grid,
   TextField,
 } from "@mui/material";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import {pagesPath} from "@/utils/$path";
-import {Add, Save,} from "@mui/icons-material";
-import {DatePicker} from "@mui/x-date-pickers";
+import { Save} from "@mui/icons-material";
 import {NewStaff, Staff} from "@/openapi/openapi-generated";
 
 const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
@@ -22,6 +21,7 @@ const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
     },
     body: JSON.stringify({ staff: arg }),
   });
+
 
 export const getServerSideProps = (async (context) => {
   const { sid } = context.query;
@@ -57,10 +57,13 @@ export default function Edit({
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-      <div>
-        <main>
-          <Box>
-            {isMutating && <LoadingOverlay />}
+      <main>
+        <Container>
+          <Box sx={(_theme) => ({
+            maxWidth: "105ch",
+            width: "100%",
+          })}>
+            {isMutating && <LoadingOverlay/>}
             <Grid
               container
               spacing={2}
@@ -81,7 +84,7 @@ export default function Edit({
                   label="姓"
                   value={staffUnderEdit.lastName}
                   onChange={(e) =>
-                    setStaffUnderEdit({ ...staffUnderEdit, lastName: e.target.value })
+                    setStaffUnderEdit({...staffUnderEdit, lastName: e.target.value})
                   }
                 />
               </Grid>
@@ -93,22 +96,20 @@ export default function Edit({
                   label="名"
                   value={staffUnderEdit.firstName}
                   onChange={(e) =>
-                    setStaffUnderEdit({ ...staffUnderEdit, firstName: e.target.value })
+                    setStaffUnderEdit({...staffUnderEdit, firstName: e.target.value})
                   }
                 />
               </Grid>
 
               <Grid item xs={12}>
-                <DatePicker
+                <TextField
                   label="生年月日"
-                  format="YYYY/MM/DD"
+                  type="date"
                   value={staffUnderEdit.birthDate}
-                  onChange={(date) => {
-                    if (date === null) return;
-
+                  onChange={(e) => {
                     setStaffUnderEdit({
                       ...staffUnderEdit,
-                      birthDate: date,
+                      birthDate: new Date(e.target.value),
                     });
                   }}
                 />
@@ -118,19 +119,19 @@ export default function Edit({
             <Fab
               variant="extended"
               color="primary"
-              style={{ left: "50%", bottom: "2%", position: "fixed" }}
+              style={{left: "50%", bottom: "2%", position: "fixed"}}
               disabled={isMutating}
               onClick={async () => {
                 await trigger(staffUnderEdit);
                 await router.push(pagesPath.staff.$url());
               }}
             >
-              <Save />
+              <Save/>
               保存
             </Fab>
           </Box>
-        </main>
-      </div>
+        </Container>
+      </main>
     </>
   )
 }

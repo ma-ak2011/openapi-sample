@@ -1,17 +1,15 @@
-import type {InferGetServerSidePropsType} from "next";
 import {useState} from "react";
 import {useRouter} from "next/router";
 import useSWRMutation from "swr/mutation";
 import Head from "next/head";
 import {
-  Box, Fab,
+  Box, Container, Fab,
   Grid,
   TextField,
 } from "@mui/material";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import {pagesPath} from "@/utils/$path";
-import {Add, Save,} from "@mui/icons-material";
-import {getServerSideProps} from "@/pages/staff/index";
+import {Save} from "@mui/icons-material";
 import {DatePicker} from "@mui/x-date-pickers";
 import {NewStaff, Staff} from "@/openapi/openapi-generated";
 
@@ -43,9 +41,12 @@ export default function Create() {
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
-      <div>
-        <main>
-          <Box>
+      <main>
+        <Container>
+          <Box sx={(_theme) => ({
+            maxWidth: "105ch",
+            width: "100%",
+          })}>
             {isMutating && <LoadingOverlay />}
             <Grid
               container
@@ -115,8 +116,8 @@ export default function Create() {
               保存
             </Fab>
           </Box>
-        </main>
-      </div>
+        </Container>
+      </main>
     </>
   )
 }
