@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import useSWRMutation from 'swr/mutation';
 import Head from 'next/head';
@@ -6,8 +5,10 @@ import { Box, Container, Fab, Grid, TextField } from '@mui/material';
 import LoadingOverlay from '@/components/LoadingOverlay';
 import { pagesPath } from '@/utils/$path';
 import { Save } from '@mui/icons-material';
-import { NewStaff, Staff } from '@/openapi/openapi-generated';
-import { format } from 'date-fns';
+import { NewStaff } from '@/openapi/openapi-generated';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
   await fetch(url, {
@@ -18,13 +19,55 @@ const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
     body: JSON.stringify({ staff: arg }),
   });
 
+export const StaffCreateSchema = z
+  .object({
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
+    email: z.string().email(),
+    birthDate: z
+      .preprocess(
+        (val) => (val === undefined ? undefined : `${String(val)}`),
+        z.string(),
+      )
+      .transform((val) => (val === '' ? '' : new Date(val).toISOString())),
+    contractStartDate: z
+      .preprocess(
+        (val) => (val === undefined ? undefined : `${String(val)}`),
+        z.string(),
+      )
+      .transform((val) => (val === '' ? '' : new Date(val).toISOString())),
+    contractEndDate: z
+      .preprocess(
+        (val) => (val === undefined ? undefined : `${String(val)}`),
+        z.string(),
+      )
+      .transform((val) => (val === '' ? '' : new Date(val).toISOString())),
+  })
+  .superRefine((val, ctx) => {
+    if (
+      new Date(val.contractStartDate).valueOf() >=
+      new Date(val.contractEndDate).valueOf()
+    ) {
+      const issue = {
+        code: z.ZodIssueCode.custom,
+        message: '契約終了日は契約開始日より後にしてください',
+      };
+      ctx.addIssue({ ...issue, path: ['contractStartDate'] });
+      ctx.addIssue({ ...issue, path: ['contractEndDate'] });
+    }
+  });
+export type StaffCreate = z.infer<typeof StaffCreateSchema>;
+
 export default function Create() {
-  const [staff, setStaff] = useState<Staff>({
-    id: 0,
-    lastName: '',
-    firstName: '',
-    birthDate: new Date(),
-    email: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+    trigger: triggerValidation,
+  } = useForm<StaffCreate>({
+    resolver: zodResolver(StaffCreateSchema),
+    mode: 'onBlur',
   });
 
   const router = useRouter();
@@ -33,6 +76,8 @@ export default function Create() {
     fetcher,
   );
 
+  console.log(watch('contractStartDate'));
+  console.log(watch('contractEndDate'));
   return (
     <>
       <Head>
@@ -50,84 +95,111 @@ export default function Create() {
             })}
           >
             {isMutating && <LoadingOverlay />}
-            <Grid
-              container
-              spacing={2}
-              style={{
-                height: '100%',
-                width: '100%',
-                marginTop: 40,
-              }}
-            >
-              <Grid item xs={12}>
-                エラーメッセージ
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  required
-                  label="姓"
-                  value={staff.lastName}
-                  onChange={(e) =>
-                    setStaff({ ...staff, lastName: e.target.value })
-                  }
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  required
-                  label="名"
-                  value={staff.firstName}
-                  onChange={(e) =>
-                    setStaff({ ...staff, firstName: e.target.value })
-                  }
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  label="生年月日"
-                  type="date"
-                  value={format(staff.birthDate, 'yyyy-MM-dd')}
-                  onChange={(e) => {
-                    setStaff({
-                      ...staff,
-                      birthDate: new Date(e.target.value),
-                    });
-                  }}
-                />
-              </Grid>
-
-              <Grid item xs={12}>
-                <TextField
-                  label="email"
-                  type="email"
-                  value={staff.email}
-                  onChange={(e) => {
-                    setStaff({
-                      ...staff,
-                      email: e.target.value,
-                    });
-                  }}
-                />
-              </Grid>
-            </Grid>
-            <Fab
-              variant="extended"
-              color="primary"
-              style={{ left: '50%', bottom: '2%', position: 'fixed' }}
-              disabled={isMutating}
-              onClick={async () => {
-                await trigger(staff);
+            <form
+              onSubmit={handleSubmit(async (data) => {
+                const result = await trigger(data);
+                console.log(result);
                 await router.push(pagesPath.staff.$url());
-              }}
+              })}
             >
-              <Save />
-              保存
-            </Fab>
+              <Grid
+                container
+                spacing={2}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  marginTop: 40,
+                }}
+              >
+                <Grid item xs={12}>
+                  エラーメッセージ
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="姓"
+                    InputProps={{
+                      ...register('lastName'),
+                    }}
+                    error={errors.lastName !== undefined}
+                    helperText={errors.lastName?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="名"
+                    InputProps={{
+                      ...register('firstName'),
+                    }}
+                    error={errors.firstName !== undefined}
+                    helperText={errors.firstName?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="生年月日"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      ...register('birthDate'),
+                    }}
+                    error={errors.birthDate !== undefined}
+                    helperText={errors.birthDate?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="email"
+                    type="email"
+                    InputProps={{
+                      ...register('email'),
+                    }}
+                    error={errors.email !== undefined}
+                    helperText={errors.email?.message}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="契約開始日"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      ...register('contractStartDate', {
+                        onBlur: () => triggerValidation('contractEndDate'),
+                      }),
+                    }}
+                    error={errors.contractStartDate !== undefined}
+                    helperText={errors.contractStartDate?.message}
+                  />
+                  <TextField
+                    label="契約終了日"
+                    type="date"
+                    InputLabelProps={{ shrink: true }}
+                    InputProps={{
+                      ...register('contractEndDate', {
+                        onBlur: () => triggerValidation('contractStartDate'),
+                      }),
+                    }}
+                    error={errors.contractEndDate !== undefined}
+                    helperText={errors.contractEndDate?.message}
+                  />
+                </Grid>
+              </Grid>
+              <Fab
+                type="submit"
+                variant="extended"
+                color="primary"
+                style={{ left: '50%', bottom: '2%', position: 'fixed' }}
+                disabled={isMutating}
+              >
+                <Save />
+                保存
+              </Fab>
+            </form>
           </Box>
         </Container>
       </main>

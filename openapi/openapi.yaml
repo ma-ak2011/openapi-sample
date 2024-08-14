@@ -18,14 +18,14 @@ paths:
         description: StaffのId
         required: true
         schema:
-          $ref: "#/components/schemas/BigInteger"
+          type: string
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Staff"
+                $ref: "#/components/schemas/NullableStaff"
     put:
       tags:
       - staff-controller
@@ -43,7 +43,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Staff"
+                $ref: "#/components/schemas/StaffForClient"
     delete:
       tags:
       - staff-controller
@@ -54,7 +54,7 @@ paths:
         description: StaffのId
         required: true
         schema:
-          $ref: "#/components/schemas/BigInteger"
+          type: string
       responses:
         "200":
           description: OK
@@ -75,7 +75,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Staff"
+                  $ref: "#/components/schemas/StaffForClient"
     post:
       tags:
       - staff-controller
@@ -92,7 +92,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Staff"
+                $ref: "#/components/schemas/StaffForClient"
 components:
   schemas:
     UpdateStaff:
@@ -105,15 +105,19 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           description: ID
-          format: int64
+          example: update-staff-id
         firstName:
           type: string
+          maxLength: 200
+          minLength: 0
           description: 名
           example: update-staff-first-name
         lastName:
           type: string
+          maxLength: 200
+          minLength: 0
           description: 性
           example: update-staff-last-name
         birthDate:
@@ -124,6 +128,14 @@ components:
           type: string
           description: メールアドレス
           example: update-staff-email
+        contractStartDate:
+          type: string
+          description: 契約開始日
+          format: date-time
+        contractEndDate:
+          type: string
+          description: 契約終了日
+          format: date-time
       example: null
     UpdateStaffRequest:
       required:
@@ -132,7 +144,7 @@ components:
       properties:
         staff:
           $ref: "#/components/schemas/UpdateStaff"
-    Staff:
+    StaffForClient:
       required:
       - birthDate
       - email
@@ -142,17 +154,44 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
+          description: ID
+          example: staff-id
         firstName:
           type: string
+          maxLength: 200
+          minLength: 0
+          description: 名
+          example: staff-first-name
         lastName:
           type: string
+          maxLength: 200
+          minLength: 0
+          description: 性
+          example: staff-last-name
         birthDate:
           type: string
+          description: 生年月日
           format: date-time
         email:
           type: string
+          description: メールアドレス
+          example: staff-email
+        contractStartDate:
+          type: string
+          description: 契約開始日
+          format: date-time
+        contractEndDate:
+          type: string
+          description: 契約終了日
+          format: date-time
+    NullableStaff:
+      type: object
+      properties:
+        staff:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/StaffForClient"
     NewStaff:
       required:
       - birthDate
@@ -162,17 +201,21 @@ components:
       type: object
       properties:
         firstName:
-          type: string
           description: 名
           example: new-staff-first-name
-        lastName:
           type: string
+          maxLength: 200
+          minLength: 0
+        lastName:
           description: 性
           example: new-staff-last-name
+          type: string
+          maxLength: 200
+          minLength: 0
         birthDate:
           type: string
-          description: 生年月日
           format: date-time
+          description: 生年月日
         email:
           type: string
           description: メールアドレス
@@ -185,36 +228,5 @@ components:
         staff:
           $ref: "#/components/schemas/NewStaff"
       description: 新規作成するスタッフ
-    BigInteger:
-      required:
-      - absoluteValue
-      - bitCount
-      - bitLength
-      - get_mag$kt_math
-      - get_signum$kt_math
-      - signum
-      type: object
-      properties:
-        bit:
-          $ref: "#/components/schemas/BigInteger"
-        get_signum$kt_math:
-          type: integer
-          format: int32
-        get_mag$kt_math:
-          type: array
-          items:
-            type: integer
-            format: int32
-        absoluteValue:
-          $ref: "#/components/schemas/BigInteger"
-        bitLength:
-          type: integer
-          format: int32
-        signum:
-          type: integer
-          format: int32
-        bitCount:
-          type: integer
-          format: int32
     Unit:
       type: object

@@ -3,6 +3,7 @@ package com.example.backend.service
 import com.example.backend.entity.Staff
 import com.example.backend.repository.StaffRepository
 import org.springframework.stereotype.Service
+import kotlin.jvm.optionals.getOrNull
 
 @Service
 class StaffService(
@@ -13,8 +14,8 @@ class StaffService(
         return staffRepository.findAll()
     }
 
-    fun findById(id: Long): Staff {
-        return staffRepository.findById(id).get()
+    fun findById(id: Long): Staff? {
+        return staffRepository.findById(id).getOrNull()
     }
 
     fun save(staff: Staff): Staff {

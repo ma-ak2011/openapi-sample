@@ -18,43 +18,40 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import api from '@/openapi/aspida/api/$api';
-import { Staff } from '@/openapi/aspida/@types';
 import { useState } from 'react';
 import { Add, DeleteForever, Edit } from '@mui/icons-material';
 import { ConfirmDialog } from '@/components/dialog/ConfirmDialog';
 import { pagesPath } from '@/utils/$path';
 import { useRouter } from 'next/router';
-import aspFetch from '@aspida/fetch';
 import useSWRMutation from 'swr/mutation';
 import LoadingOverlay from '@/components/LoadingOverlay';
 import { format } from 'date-fns';
+import {
+  StaffControllerApi,
+  StaffForClient,
+} from '@/openapi/openapi-generated';
 
 export const getServerSideProps = (async () => {
-  const res = await api(aspFetch(fetch)).staffs.get();
-  const staffsAsJson = res.body;
-  return { props: { staffsAsJson } };
-}) satisfies GetServerSideProps<{ staffsAsJson: Staff[] }>;
+  const res = await new StaffControllerApi().index();
+  const staffs = res.data;
+  return { props: { staffs: staffs } };
+}) satisfies GetServerSideProps<{ staffs: StaffForClient[] }>;
 
-const fetcher = async (url: string, { arg }: { arg: number }) =>
+const fetcher = async (url: string, { arg }: { arg: string }) =>
   await fetch(`${url}${arg}/`, {
     method: 'DELETE',
   });
 
 export default function Staffs({
-  staffsAsJson,
+  staffs,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const staffs = staffsAsJson.map((s) => ({
-    ...s,
-    birthDate: new Date(s.birthDate),
-  }));
   const [viewState, setViewState] = useState<{
     filterState: { staffCodes: string[]; storeCodes: string[] };
     sortState: {
-      column: keyof Staff;
+      column: keyof StaffForClient;
       direction: 'asc' | 'desc';
     };
-    confirmDeleteId: number | null;
+    confirmDeleteId: string | null;
   }>({
     filterState: {
       staffCodes: [],
@@ -82,8 +79,6 @@ export default function Staffs({
 
     if (typeof a[column] === 'string' && typeof b[column] === 'string')
       return a[column].localeCompare(b[column], 'ja');
-    if (a[column] instanceof Date && b[column] instanceof Date)
-      return a[column].getTime() - b[column].getTime();
 
     return 0;
   });

@@ -1,10 +1,12 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     id("org.springframework.boot") version "3.3.2"
     id("io.spring.dependency-management") version "1.1.6"
     kotlin("jvm") version "1.9.24"
     kotlin("plugin.spring") version "1.9.24"
     kotlin("plugin.jpa") version "1.9.24"
-    id("org.springdoc.openapi-gradle-plugin") version "1.9.0"
+    id("org.openapi.generator") version "7.7.0"
     id("io.gitlab.arturbosch.detekt").version("1.23.6")
 }
 
@@ -63,10 +65,44 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-openApi {
-    apiDocsUrl.set("http://localhost:8080/v3/api-docs.yaml")
-    outputDir.set(project.rootDir.parentFile.resolve("openapi"))
-    outputFileName.set("openapi.yaml")
+task<GenerateTask>("generateApiDoc") {
+    generatorName.set("html2")
+    inputSpec.set(project.rootDir.parentFile.resolve("openapi").path + "/openapi.yaml")
+    outputDir.set("$buildDir/openapi/doc/")
+}
+
+task<GenerateTask>("generateApiServer") {
+    doFirst {
+        delete("$projectDir/src/main/kotlin/com/example/backend/generated")
+    }
+    generatorName.set("kotlin-spring")
+    inputSpec.set(project.rootDir.parentFile.resolve("openapi").path + "/openapi.yaml")
+    outputDir.set("$projectDir")
+    apiPackage.set("com.example.backend.generated.controller")
+    invokerPackage.set("com.example.backend.generated.invoker")
+    modelPackage.set("com.example.backend.generated.model")
+    configOptions.set(
+        mapOf(
+            "annotationLibrary" to "none",
+            "documentationProvider" to "none",
+            "exceptionHandler" to "false",
+            "gradleBuildFile" to "false",
+            "interfaceOnly" to "true",
+            "serializationLibrary" to "jackson",
+            "useBeanValidation" to "true",
+            "useSpringBoot3" to "true",
+        )
+    )
+    additionalProperties.set(
+        mapOf(
+            "useTags" to "true"
+        )
+    )
+    dependsOn("processResources")
+}
+
+tasks.compileKotlin {
+    dependsOn("generateApiServer")
 }
 
 detekt {

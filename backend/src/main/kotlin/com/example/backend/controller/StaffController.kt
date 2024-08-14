@@ -1,15 +1,17 @@
 package com.example.backend.controller
 
 import com.example.backend.entity.Staff
+import com.example.backend.generated.controller.StaffControllerApi
+import com.example.backend.generated.model.NewStaffRequest
+import com.example.backend.generated.model.NullableStaff
+import com.example.backend.generated.model.StaffForClient
+import com.example.backend.generated.model.UpdateStaffRequest
 import com.example.backend.service.StaffService
-import io.swagger.v3.oas.annotations.Parameter
-import jakarta.validation.Valid
-import org.gciatto.kt.math.BigInteger
 import org.springframework.http.HttpStatus
-import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.CrossOrigin
+import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
@@ -17,80 +19,106 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin("http://localhost:3000")
 class StaffController(
     val staffService: StaffService
-) {
-    @GetMapping("/api/staffs/", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun index(): ResponseEntity<Array<Staff>> {
+) : StaffControllerApi {
+
+    override fun index(): ResponseEntity<List<StaffForClient>> {
         val staffs = staffService.findAll().toTypedArray()
+        val staffsForClient = staffs.map {
+            StaffForClient(
+                it.id.toString(),
+                it.firstName,
+                it.lastName,
+                it.birthDate,
+                it.email,
+                it.contractStartDate,
+                it.contractEndDate
+            )
+        }.toList()
         return ResponseEntity(
-            staffs,
+            staffsForClient,
             HttpStatus.OK
         )
     }
 
-    @GetMapping("/api/staffs/{id}/", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun show(
-        @Parameter(description = "StaffのId", required = true)
-        @Valid
-        @PathVariable("id")
-        id: BigInteger,
-    ): ResponseEntity<Staff?> {
+    override fun show(
+        id: String,
+    ): ResponseEntity<NullableStaff> {
         val staff = staffService.findById(id.toLong())
+        val staffForClient = staff?.let {
+            StaffForClient(
+                it.id.toString(),
+                it.firstName,
+                it.lastName,
+                it.birthDate,
+                it.email,
+                it.contractStartDate,
+                it.contractEndDate
+            )
+        }
         return ResponseEntity(
-            staff,
+            NullableStaff(staffForClient),
             HttpStatus.OK
         )
     }
 
-    @PostMapping("/api/staffs/", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun create(
-        @Parameter(description = "新規作成するスタッフ", required = true)
-        @Valid
-        @RequestBody
+    override fun create(
         newStaffRequest: NewStaffRequest,
-    ): ResponseEntity<Staff> {
+    ): ResponseEntity<StaffForClient> {
         val newStaff = Staff(
             0,
-            newStaffRequest.validatedStaff.validatedFirstName,
-            newStaffRequest.validatedStaff.validatedLastName,
-            newStaffRequest.validatedStaff.validatedBirthDate,
-            newStaffRequest.validatedStaff.validatedEmail
+            newStaffRequest.staff.firstName,
+            newStaffRequest.staff.lastName,
+            newStaffRequest.staff.birthDate,
+            newStaffRequest.staff.email,
         )
         staffService.save(newStaff)
+        val staffForClient = StaffForClient(
+            newStaff.id.toString(),
+            newStaff.firstName,
+            newStaff.lastName,
+            newStaff.birthDate,
+            newStaff.email,
+            newStaff.contractStartDate,
+            newStaff.contractEndDate
+        )
         return ResponseEntity(
-            newStaff,
+            staffForClient,
             HttpStatus.OK
         )
     }
 
-    @PutMapping("/api/staffs/{id}/", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun update(
-        @Parameter(description = "更新するスタッフ", required = true)
-        @Valid
-        @PathVariable("id")
+    override fun update(
         updateStaffRequest: UpdateStaffRequest,
-    ): ResponseEntity<Staff> {
+    ): ResponseEntity<StaffForClient> {
         val updatedStaff = Staff(
-            updateStaffRequest.validatedStaff.validatedId,
-            updateStaffRequest.validatedStaff.validatedFirstName,
-            updateStaffRequest.validatedStaff.validatedLastName,
-            updateStaffRequest.validatedStaff.validatedBirthDate,
-            updateStaffRequest.validatedStaff.validatedEmail
+            updateStaffRequest.staff.id.toLong(),
+            updateStaffRequest.staff.firstName,
+            updateStaffRequest.staff.lastName,
+            updateStaffRequest.staff.birthDate,
+            updateStaffRequest.staff.email,
         )
+        updatedStaff.contractStartDate = updateStaffRequest.staff.contractStartDate
+        updatedStaff.contractEndDate = updateStaffRequest.staff.contractEndDate
         staffService.save(updatedStaff)
+        val staffForClient = StaffForClient(
+            updatedStaff.id.toString(),
+            updatedStaff.firstName,
+            updatedStaff.lastName,
+            updatedStaff.birthDate,
+            updatedStaff.email,
+            updatedStaff.contractStartDate!!,
+            updatedStaff.contractEndDate!!
+        )
         return ResponseEntity(
-            updatedStaff,
+            staffForClient,
             HttpStatus.OK
         )
     }
 
-    @DeleteMapping("/api/staffs/{id}/", produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun delete(
-        @Parameter(description = "StaffのId", required = true)
-        @Valid
-        @PathVariable("id")
-        id: BigInteger,
-    ): ResponseEntity<Unit> {
+    override fun delete(
+        id: String,
+    ): ResponseEntity<Any> {
         staffService.deleteById(id.toLong())
-        return ResponseEntity(Unit, HttpStatus.OK)
+        return ResponseEntity(HttpStatus.OK)
     }
 }

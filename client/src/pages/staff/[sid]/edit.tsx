@@ -7,7 +7,11 @@ import { Box, Container, Fab, Grid, TextField } from '@mui/material';
 import LoadingOverlay from '@/components/LoadingOverlay';
 import { pagesPath } from '@/utils/$path';
 import { Save } from '@mui/icons-material';
-import { NewStaff, Staff } from '@/openapi/openapi-generated';
+import {
+  NewStaff,
+  StaffControllerApi,
+  StaffForClient,
+} from '@/openapi/openapi-generated';
 import { format } from 'date-fns';
 
 const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
@@ -20,19 +24,15 @@ const fetcher = async (url: string, { arg }: { arg: NewStaff }) =>
   });
 
 export const getServerSideProps: GetServerSideProps<
-  { staff: Staff },
+  { staff: StaffForClient },
   { sid: string }
 > = async (context) => {
   if (context.params === undefined) throw new Error('Invalid parameters');
 
   const { sid } = context.params;
-  const res = await fetch(`http://localhost:8080/api/staffs/${sid}/`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  const staff = (await res.json()) as Staff;
+  const api = new StaffControllerApi();
+  const response = await api.show(sid);
+  const staff = response.data;
 
   return { props: { staff } };
 };
@@ -40,10 +40,7 @@ export const getServerSideProps: GetServerSideProps<
 export default function Edit({
   staff,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  const [staffUnderEdit, setStaffUnderEdit] = useState<Staff>({
-    ...staff,
-    birthDate: new Date(staff.birthDate),
-  });
+  const [staffUnderEdit, setStaffUnderEdit] = useState<StaffForClient>(staff);
 
   const router = useRouter();
   const { trigger, isMutating } = useSWRMutation(
@@ -119,7 +116,7 @@ export default function Edit({
                   onChange={(e) => {
                     setStaffUnderEdit({
                       ...staffUnderEdit,
-                      birthDate: new Date(e.target.value),
+                      birthDate: e.target.value,
                     });
                   }}
                 />
