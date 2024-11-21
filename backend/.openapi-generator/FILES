@@ -1,0 +1,10 @@
+README.md
+pom.xml
+src/main/kotlin/com/example/backend/generated/controller/ApiUtil.kt
+src/main/kotlin/com/example/backend/generated/controller/StaffControllerApi.kt
+src/main/kotlin/com/example/backend/generated/model/NewStaff.kt
+src/main/kotlin/com/example/backend/generated/model/NewStaffRequest.kt
+src/main/kotlin/com/example/backend/generated/model/NullableStaff.kt
+src/main/kotlin/com/example/backend/generated/model/StaffForClient.kt
+src/main/kotlin/com/example/backend/generated/model/UpdateStaff.kt
+src/main/kotlin/com/example/backend/generated/model/UpdateStaffRequest.kt

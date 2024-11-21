@@ -1,0 +1,232 @@
+openapi: 3.0.1
+info:
+  title: Implementing Server Side Kotlin
+  description: Sample API of Hands On Server Side Kotlin
+  version: "0.0"
+servers:
+- url: http://localhost:8080
+  description: Local Server
+paths:
+  /api/staffs/{id}/:
+    get:
+      tags:
+      - staff-controller
+      operationId: show
+      parameters:
+      - name: id
+        in: path
+        description: StaffのId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NullableStaff"
+    put:
+      tags:
+      - staff-controller
+      operationId: update
+      parameters:
+      - name: id
+        in: path
+        description: 更新するスタッフ
+        required: true
+        schema:
+          $ref: "#/components/schemas/UpdateStaffRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffForClient"
+    delete:
+      tags:
+      - staff-controller
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        description: StaffのId
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unit"
+  /api/staffs/:
+    get:
+      tags:
+      - staff-controller
+      operationId: index
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StaffForClient"
+    post:
+      tags:
+      - staff-controller
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NewStaffRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StaffForClient"
+components:
+  schemas:
+    UpdateStaff:
+      required:
+      - birthDate
+      - email
+      - firstName
+      - id
+      - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: update-staff-id
+        firstName:
+          type: string
+          maxLength: 200
+          minLength: 0
+          description: 名
+          example: update-staff-first-name
+        lastName:
+          type: string
+          maxLength: 200
+          minLength: 0
+          description: 性
+          example: update-staff-last-name
+        birthDate:
+          type: string
+          description: 生年月日
+          format: date-time
+        email:
+          type: string
+          description: メールアドレス
+          example: update-staff-email
+        contractStartDate:
+          type: string
+          description: 契約開始日
+          format: date-time
+        contractEndDate:
+          type: string
+          description: 契約終了日
+          format: date-time
+      example: null
+    UpdateStaffRequest:
+      required:
+      - staff
+      type: object
+      properties:
+        staff:
+          $ref: "#/components/schemas/UpdateStaff"
+    StaffForClient:
+      required:
+      - birthDate
+      - email
+      - firstName
+      - id
+      - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID
+          example: staff-id
+        firstName:
+          type: string
+          maxLength: 200
+          minLength: 0
+          description: 名
+          example: staff-first-name
+        lastName:
+          type: string
+          maxLength: 200
+          minLength: 0
+          description: 性
+          example: staff-last-name
+        birthDate:
+          type: string
+          description: 生年月日
+          format: date-time
+        email:
+          type: string
+          description: メールアドレス
+          example: staff-email
+        contractStartDate:
+          type: string
+          description: 契約開始日
+          format: date-time
+        contractEndDate:
+          type: string
+          description: 契約終了日
+          format: date-time
+    NullableStaff:
+      type: object
+      properties:
+        staff:
+          nullable: true
+          allOf:
+            - $ref: "#/components/schemas/StaffForClient"
+    NewStaff:
+      required:
+      - birthDate
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        firstName:
+          description: 名
+          example: new-staff-first-name
+          type: string
+          maxLength: 200
+          minLength: 0
+        lastName:
+          description: 性
+          example: new-staff-last-name
+          type: string
+          maxLength: 200
+          minLength: 0
+        birthDate:
+          type: string
+          format: date-time
+          description: 生年月日
+        email:
+          type: string
+          description: メールアドレス
+          example: new-staff-email
+    NewStaffRequest:
+      required:
+      - staff
+      type: object
+      properties:
+        staff:
+          $ref: "#/components/schemas/NewStaff"
+      description: 新規作成するスタッフ
+    Unit:
+      type: object

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="48e04461-93f7-4d2e-91cb-f57e09397170" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/openapi-sample.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/openapi-sample.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aspida.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2je5GGhwqB76vGeTu3q5ECIQpda" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/setup-project&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapi-sample/client/src/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapi-sample/client/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/hashidzumekiyoshishi/Documents/Program/Sandbox/openapi-sample/client/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/features/staff" />
+      <recent name="$PROJECT_DIR$/src/utils" />
+      <recent name="$PROJECT_DIR$/public" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../openapi" />
+      <recent name="$PROJECT_DIR$/src/pages/staff/[sid]" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-WS-242.21829.43" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="48e04461-93f7-4d2e-91cb-f57e09397170" name="Changes" comment="" />
+      <created>1721734604796</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721734604796</updated>
+      <workItem from="1721734605903" duration="14281000" />
+      <workItem from="1721796019670" duration="25778000" />
+      <workItem from="1721977451669" duration="8000" />
+      <workItem from="1721977617743" duration="147000" />
+      <workItem from="1721980944361" duration="55000" />
+      <workItem from="1721981003830" duration="12500000" />
+      <workItem from="1722008267046" duration="16217000" />
+      <workItem from="1722063745738" duration="5527000" />
+      <workItem from="1722156636161" duration="20255000" />
+      <workItem from="1722420166741" duration="6615000" />
+      <workItem from="1722427369805" duration="4644000" />
+      <workItem from="1722432034374" duration="22457000" />
+      <workItem from="1722603951326" duration="9440000" />
+      <workItem from="1722781217384" duration="3010000" />
+      <workItem from="1723563461854" duration="81000" />
+      <workItem from="1723563558827" duration="13327000" />
+      <workItem from="1723927313919" duration="599000" />
+      <workItem from="1723939546308" duration="2341000" />
+      <workItem from="1723967277203" duration="599000" />
+      <workItem from="1724192265390" duration="599000" />
+      <workItem from="1724253398470" duration="599000" />
+      <workItem from="1724569463416" duration="599000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
