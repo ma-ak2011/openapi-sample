@@ -9,8 +9,7 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "gen:path": "pathpida --ignorepath .gitignore -w -s --output ./src/utils",
-    "gen:open": "npx @openapitools/openapi-generator-cli generate -g typescript-axios -i ../openapi/openapi.yaml -o ./src/openapi/openapi-generated",
-    "gen:aspida": "rm -rf src/openapi/aspida && openapi2aspida -o src/openapi/aspida"
+    "gen:open": "npx @openapitools/openapi-generator-cli generate -g typescript-axios -i ../openapi/openapi.yaml -o ./src/openapi/openapi-generated"
   },
   "dependencies": {
     "@emotion/react": "^11.13.0",
@@ -36,6 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "13.5.6",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
